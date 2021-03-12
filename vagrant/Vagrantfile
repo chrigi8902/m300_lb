@@ -7,6 +7,7 @@ config.vm.provider "virtualbox" do |vb|
 end
 config.vm.provision "file", source: "../website/index.php", destination: "/var/www/html/index.php"
 config.vm.provision "file", source: "../website/python/get_price.py", destination: "/var/www/html/python/get_price.py"
+config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/www/html/pictures/background.jpg"
 config.vm.provision "shell", inline: <<-SHELL
   # Packages vom lokalen Server holen
   # sudo sed -i -e"1i deb {{config.server}}/apt-mirror/mirror/archive.ubuntu.com/ubuntu xenial main restricted" /etc/apt/sources.list 
@@ -20,10 +21,7 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo python3.6 -m pip install yahoo_fin
   sudo apt-get -y install apache2
   sudo apt -y install apache2 php libapache2-mod-php
-  #sudo mkdir /var/www/html/python
-  #sudo mkdir /var/www/html/python/tmp
-  #sudo mkdir /var/www/html/pictures
-  #sudo mkdir /var/www/html/css
+
 SHELL
 end
 
