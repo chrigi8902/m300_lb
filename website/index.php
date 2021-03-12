@@ -8,5 +8,14 @@
             <input type="text" name="stock" value="" ><br><br>
             <input type="submit" name="submit" value="Submit">
         </form>
+
+        <?php 
+            function pre_r( $array )
+            {
+                $valor = $_POST['stock'];
+                $price = exec("python ./python/get_price.py $valor 2<&1");
+                sleep (5);
+            }
+        ?>
     </body>
 </html>

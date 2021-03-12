@@ -1,7 +1,7 @@
 import sys
 from yahoo_fin import stock_info as si
 
-stock = "amc"
+stock = str(sys.argv[1])
 
 price = si.get_live_price(stock)
 price_str = str(price)
