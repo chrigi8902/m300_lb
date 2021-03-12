@@ -5,9 +5,9 @@
     <body>
         <?php
             $valor = $_POST['stock'];
-            $price = exec("python ./python/get_price.py $valor 2<&1");
-            $valor_py = file_get_contents( "./python/tmp/stock.txt" );
-            $price_py = file_get_contents( "./python/tmp/price.txt" );
+            $price = exec("python3.6 ./python/get_price.py $valor 2<&1");
+            $valor_py = file_get_contents( "./python/tmp/stock" );
+            $price_py = file_get_contents( "./python/tmp/price" );
             echo "Price for: " .$valor_py ."is: " .$price_py ;
         ?>
         <form action="" method="Post">
