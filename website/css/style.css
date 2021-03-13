@@ -19,14 +19,20 @@ h1 {
 
 }
 
+h2 {
+    color: white;
+    font-size: 50px;
+    width: 18em;
+ 
+ }
 #stockin {
     height: 1em;
-    width: 15em;
+    width: 14em;
     font-size: 0.6em;
 }
 
 #stocksub {
-    height: 2em;
+    height: 1.2em;
     width: 6em;
     font-size: 0.6em;
 }
