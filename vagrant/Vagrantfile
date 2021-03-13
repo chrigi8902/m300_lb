@@ -7,6 +7,7 @@ config.vm.provider "virtualbox" do |vb|
 end
 config.vm.provision "file", source: "../website/index.php", destination: "/var/www/html/index.php"
 config.vm.provision "file", source: "../website/python/get_price.py", destination: "/var/www/html/python/get_price.py"
+config.vm.provision "file", source: "../website/css/style.css", destination: "/var/www/html/css/style.css"
 config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/www/html/pictures/background.jpg"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
@@ -20,7 +21,5 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo apt -y install apache2 php libapache2-mod-php
   sudo python3.6 -m pip install yahoo_fin  
 SHELL
-
-
 end
 
