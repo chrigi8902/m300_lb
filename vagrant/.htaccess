@@ -1,0 +1,4 @@
+ AuthType Basic
+ AuthName "Titel des Passwortschutzes"
+ AuthUserFile /var/www/html/.htpasswd
+ Require valid-user

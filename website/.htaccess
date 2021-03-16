@@ -1,0 +1,3 @@
+AuthType Basic
+AuthName "Password needed"
+AuthUserFile ./htpassword
