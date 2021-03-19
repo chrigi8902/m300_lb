@@ -23,11 +23,15 @@
     $valor_py = file_get_contents( "./python/tmp/stock.txt" );
     $price_py = file_get_contents( "./python/tmp/price.txt" );
     ?>
+ 
   <table>
     <tr>
+       
       <th>Beschrieb</th>
       <th>Wert</th>
+      
     </tr>
+
     <tr>
       <td>Aktie:</td>
       <td><?php echo $valor_py ?></td>
@@ -36,7 +40,6 @@
       <td>Preis:</td>
       <td><?php echo $price_py?></td>
     </tr>
-
   </table>
   <p>
 

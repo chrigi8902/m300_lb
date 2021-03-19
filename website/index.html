@@ -16,31 +16,34 @@
       <input type="text" id="stockin" name="stock" value="">
       <input type="submit" id="stocksub" name="submit" value="Submit">
     </form>
-  </h1>
+  </h1>    
+    <?php
+    $valor = $_POST['stock'];
+    $price = exec("python ./python/get_price.py $valor 2<&1");
+    $valor_py = file_get_contents( "./python/tmp/stock.txt" );
+    $price_py = file_get_contents( "./python/tmp/price.txt" );
+    ?>
+ 
   <table>
     <tr>
+       
       <th>Beschrieb</th>
       <th>Wert</th>
+      
     </tr>
+
     <tr>
       <td>Aktie:</td>
-      <td>tsla</td>
+      <td><?php echo $valor_py ?></td>
     </tr>
     <tr>
       <td>Preis:</td>
-      <td>658.000000</td>
+      <td><?php echo $price_py?></td>
     </tr>
-
   </table>
+ 
   <p>
-    <?php
-                $valor = $_POST['stock'];
-                $price = exec("python ./python/get_price.py $valor 2<&1");
-                $valor_py = file_get_contents( "./python/tmp/stock.txt" );
-                $price_py = file_get_contents( "./python/tmp/price.txt" );
-                echo "Price for: " .$valor_py ."is: ";
-                echo $price_py ;
-            ?>
+
   </p>
 </body>
 
