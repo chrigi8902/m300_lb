@@ -19,9 +19,9 @@
   </h1>    
     <?php
     $valor = $_POST['stock'];
-    $price = exec("python ./python/get_price.py $valor 2<&1");
-    $valor_py = file_get_contents( "./python/tmp/stock.txt" );
-    $price_py = file_get_contents( "./python/tmp/price.txt" );
+    $price = exec("python3.6 ./python/get_price.py $valor 2<&1");
+    $valor_py = file_get_contents( "./python/tmp/stock" );
+    $price_py = file_get_contents( "./python/tmp/price" );
     ?>
  
   <table>
@@ -34,17 +34,15 @@
 
     <tr>
       <td>Aktie:</td>
-      <td><?php echo $valor_py ?></td>
+      <td style="text-transform:uppercase;"><?php echo $valor_py ?></td>
     </tr>
     <tr>
       <td>Preis:</td>
       <td><?php echo $price_py?></td>
     </tr>
   </table>
- 
-  <p>
-
-  </p>
+  <hr style="margin-top: 50px;">
+  
 </body>
 
 </html>
