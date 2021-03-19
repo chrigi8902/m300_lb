@@ -1,9 +1,9 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", ip: "192.168.1.50", guest:80, auto_correct: true
+  config.vm.network "public_network", bridge:"Realtek PCIe GbE Family Controller", ip: "192.168.1.50", guest:80, host:8080, auto_correct: true
   config.vm.synced_folder ".", "/var/www/html"  
 config.vm.provider "virtualbox" do |vb|
-  vb.memory = "1024" 
+  vb.memory = "8192" 
 end
 config.vm.provision "file", source: "../website/index_unix.php", destination: "/var/www/html/index.php"
 config.vm.provision "file", source: "../website/python/get_price_unix.py", destination: "/var/www/html/python/get_price.py"
@@ -21,7 +21,7 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo python3.6 get-pip.py
   sudo apt-get -y install apache2
   sudo apt -y install apache2 php libapache2-mod-php
-  sudo python3.6 -m pip install yahoo_fin  
+  sudo python3.6 -m pip install yahoo_fin
 SHELL
 end
 
