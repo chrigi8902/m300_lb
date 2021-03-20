@@ -8,7 +8,7 @@
 
 <body>
   <header>
-    <h1>Stonks Website</h1>
+    <h1>Stonks Website</h1>    
     <hr>
   </header>
   <h1>
@@ -41,7 +41,6 @@
       <td><?php echo $price_py?></td>
     </tr>
   </table>
-  <hr style="margin-top: 50px;">
   
 </body>
 

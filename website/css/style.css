@@ -5,9 +5,9 @@ header {
 }
 
 body {
-  background-image: url('../pictures/background.jpg');
-  font-family: arial, sans-serif;
-  background-color: white;
+    background-image: url('../pictures/background.jpg');
+    font-family: arial, sans-serif;
+    background-color: white;
 }
 
 table {
@@ -86,3 +86,14 @@ p {
     background-color: transparent;
     color: white;
 }
+
+hr {
+    border:none;
+    height: 20px;
+       width: 50%;
+      height: 50px;
+      margin-top: 0;
+      border-bottom: 1px solid #1f1209;
+      box-shadow: 0 20px 20px -20px #333;
+    margin: -50px auto 10px; 
+  }
