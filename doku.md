@@ -23,7 +23,7 @@ Ziel ist die Website selbst zu erstellen, Sie automatisch auf der Vagrant vm lau
 
 ___
 ## 2.1 Konzept
-___
+
 
 </br>
 
@@ -37,7 +37,7 @@ Hier visualisiert:
 
 ___
 ## 2.2 Funktionsweise der Webseite
-___
+
 
 </br>
 
@@ -66,8 +66,6 @@ Dabei ist $valor der eingegebene Wert, welcher weiter unten verwendet wird um mi
 
 ___ 
 ## 2.3 Funktionsweise "get_price.py" 
-___
-
 </br>
 
 Die "get_price.py" datei ist eine Python Datei, welche den Preis des Valors mithilfe einer API rausfindet. Anschliessend wird sowohl der Valor als auch der Preis in zwei seperate Files geschrieben. Diese werden dann wie oben vom PHP auf der Webseite angezeigt. 
@@ -112,7 +110,6 @@ Auch für die Sicherheit habe ich mir Gedanken gemacht und bin zum Schluss gekom
 </br>
 ___
 ## 3.1 Funktionsweise von htaccess
-___
 
 htaccess ist eine Konfigurationsdatei welche Verzeichnisbezogene Regeln erstellt. ich persönlich brauche sie allerdings nur, um das Password abzufrage. 
 </br>
