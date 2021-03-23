@@ -34,7 +34,8 @@ Hier visualisiert:
 *Der Zugriff übers Internet funktioniert leider nicht*
 </br>
 </br>
-
+Auf der Browser Seite sieht es für den User ungefähr folgendermassen aus:
+<img src="./doku/Design.PNG" alt="Aufbau"><br>
 ___
 ## 2.2 Funktionsweise der Webseite
 
@@ -101,7 +102,7 @@ Die Python Datei sieht folgendermassen aus:
 -   Im oberen Teil werden alle benötigten Module installiert welche benötigt werden. "sys" benutze ich im script, um Argumente vom PHP entgegen zu nehmen (#4). 
 -   Das zweite Modul in der Zeile #2 wird dazu benötigt die aktuellen Preise der Aktien zu bekommen. 
 -   Anschliessend wird in der Zeile #6 der preis rausgefunden in dem Man die API mit dem Stock Namen "füttert"
--   Anschliessend werden beide Daten (Stock und Preis) in die beiden Files geschrieben, aus dem unser PHP die Daten enziehen kann. 
+-   Unten werden beide Daten (Stock und Preis) in die beiden Files geschrieben, aus dem unser PHP die Daten enziehen kann. 
 </br></br></br></br>
 
 # 3. Sicherheit
@@ -111,7 +112,7 @@ Auch für die Sicherheit habe ich mir Gedanken gemacht und bin zum Schluss gekom
 ___
 ## 3.1 Funktionsweise von htaccess
 
-htaccess ist eine Konfigurationsdatei welche Verzeichnisbezogene Regeln erstellt. ich persönlich brauche sie allerdings nur, um das Password abzufrage. 
+htaccess ist eine Konfigurationsdatei welche Verzeichnisbezogene Regeln erstellt. ich persönlich brauche sie allerdings nur, um das Passwort abzufrage. 
 </br>
 </br>
 ___
