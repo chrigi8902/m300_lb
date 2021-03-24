@@ -8,6 +8,8 @@ end
 config.vm.provision "file", source: "../website/unix/index_unix.php", destination: "/var/www/html/index.php"
 config.vm.provision "file", source: "../website/unix/get_price_unix.py", destination: "/var/www/html/python/get_price.py"
 config.vm.provision "file", source: "../website/unix/apache2.conf", destination: "/var/www/html/apache2.conf"
+config.vm.provision "file", source: "../website/unix/smb.conf", destination: "/var/www/html/smb.conf"
+config.vm.provision "file", source: "../website/unix/pw.sh", destination: "/var/www/html/pw.sh"
 config.vm.provision "file", source: "../website/unix/.htaccess_unix", destination: "/var/www/html/.htaccess"
 config.vm.provision "file", source: "../website/unix/.htpasswd", destination: "/var/www/html/.htpasswd"
 config.vm.provision "file", source: "../website/css/style.css", destination: "/var/www/html/css/style.css"
@@ -25,6 +27,13 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo python3.6 -m pip install yahoo_fin
   sudo mv /var/www/html/apache2.conf /etc/apache2/apache2.conf
   sudo service apache2 restart
+  sudo chmod 777 /etc/samba/pw.sh
+  sudo apt install -y samba  
+  sudo mv /var/www/html/smb.conf /etc/samba/smb.conf
+  sudo mv /var/www/html/pw.sh /etc/samba/pw.sh
+  sudo /etc/samba/pw.sh
+  sudo ufw allow samba
+  sudo service smbd restart
 SHELL
 end
 
