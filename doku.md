@@ -6,10 +6,17 @@
   - [2.1 Konzept](#21-konzept)
   - [2.2 Funktionsweise der Webseite](#22-funktionsweise-der-webseite)
   - [2.3 Funktionsweise "get_price.py"](#23-funktionsweise-get_pricepy)
-- [3. Sicherheit](#3-sicherheit)
-  - [3.1 Funktionsweise von htaccess](#31-funktionsweise-von-htaccess)
-  - [3.2 Aufbau von htaccess](#32-aufbau-von-htaccess)
-- [Zusätzlicher Dienst - Samba Share](#zusätzlicher-dienst---samba-share)
+- [3. Zusätzlicher Dienst - Samba Share](#3-zusätzlicher-dienst---samba-share)
+- [4. Sicherheit](#4-sicherheit)
+  - [4.1 Funktionsweise von htaccess](#41-funktionsweise-von-htaccess)
+  - [4.2 Aufbau von htaccess](#42-aufbau-von-htaccess)
+- [5. Testing](#5-testing)
+  - [Testfall 1](#testfall-1)
+  - [Testfall 2](#testfall-2)
+  - [Testfall 3](#testfall-3)
+  - [Testfall 4](#testfall-4)
+  - [Testfall 5](#testfall-5)
+  - [Testfall 6 - Samba](#testfall-6---samba)
 
 </br></br></br></br>
 # 1. Einleitung
@@ -106,34 +113,8 @@ Die Python Datei sieht folgendermassen aus:
 -   Unten werden beide Daten (Stock und Preis) in die beiden Files geschrieben, aus dem unser PHP die Daten enziehen kann. 
 </br></br></br></br>
 
-# 3. Sicherheit
-Auch für die Sicherheit habe ich mir Gedanken gemacht und bin zum Schluss gekommen, dass ich .htaccess verwenden werde, da dies eine leichte art der Authentifizierung ist, welche für eine Webseite dieser Art vollkommen ausreicht. 
-</br>
-</br>
 ___
-## 3.1 Funktionsweise von htaccess
-
-htaccess ist eine Konfigurationsdatei welche Verzeichnisbezogene Regeln erstellt. ich persönlich brauche sie allerdings nur, um das Passwort abzufrage. 
-</br>
-</br>
-___
-## 3.2 Aufbau von htaccess
-
-    AuthType Basic
-    AuthName "Password needed"
-    AuthUserFile /var/www/html/.htpasswd
-    Require valid-user
-
-Hier gebt man zum einen an, was der Grund für das Passwort ist (Authname "Password needed") und zum anderen den zugehörigen Pfad zum password File, welchen man sich im Internet generieren lassen kann. </br>
-So sieht das htpasswd aus:
-    
-    m300:$apr1$2siq4wkt$25P6wMyMim6N08yLmmKqV0
-
-Ganz vorne zu erkennen ist der Username und im zweiten Teil ist das verschlüsselte Passwort, welches in diesem Fall ebenfalls m300 ist. 
-</br>
-</br>
-___
-# Zusätzlicher Dienst - Samba Share
+# 3. Zusätzlicher Dienst - Samba Share
 
 Als zusätzlichen Dienst habe ich eine Samba Freigabe erstellt, welche den gesamten /var/www/html Ordner freigibt. Installiert habe ich diesen Service, damit man jederzeit die Webseite anpassen kann, ohne sich auf die Maschine verbinden zu müssen. </br>
 Erstellt wird der Samba Share durch einen Konfigurationsbereich in der smb.conf Datei. 
@@ -158,4 +139,72 @@ Zwar könnte man die unterscheidung zwischen Sudo User und normalem user weglass
 Mit dem Share kann man neben der Webseite andere configurations Dateien mit Visual Studio Code anschauen um einen besseren überblick zu bekommen. Unter Windows muss man sich dort nur per erstellten User anmelden und kann die Dateien einsehen:
 
 <img src="./doku/samba.PNG" alt="Aufbau"><br>
+</br>
+</br>
+___
+# 4. Sicherheit
+Auch für die Sicherheit habe ich mir Gedanken gemacht und bin zum Schluss gekommen, dass ich .htaccess verwenden werde, da dies eine leichte art der Authentifizierung ist, welche für eine Webseite dieser Art vollkommen ausreicht. 
+</br>
+</br>
+___
+## 4.1 Funktionsweise von htaccess
+
+htaccess ist eine Konfigurationsdatei welche Verzeichnisbezogene Regeln erstellt. ich persönlich brauche sie allerdings nur, um das Passwort abzufrage. 
+</br>
+</br>
+___
+## 4.2 Aufbau von htaccess
+
+    AuthType Basic
+    AuthName "Password needed"
+    AuthUserFile /var/www/html/.htpasswd
+    Require valid-user
+
+Hier gebt man zum einen an, was der Grund für das Passwort ist (Authname "Password needed") und zum anderen den zugehörigen Pfad zum password File, welchen man sich im Internet generieren lassen kann. </br>
+So sieht das htpasswd aus:
+    
+    m300:$apr1$2siq4wkt$25P6wMyMim6N08yLmmKqV0
+
+Ganz vorne zu erkennen ist der Username und im zweiten Teil ist das verschlüsselte Passwort, welches in diesem Fall ebenfalls m300 ist. 
+</br>
+</br>
+
+___
+# 5. Testing
+
+## Testfall 1
+Die Virtuelle Maschine Setzt sich ohne Userinteraktion selber auf. </br></br>
+<img src="./doku/Test1.PNG" alt="Aufbau"><br></br>
+
+## Testfall 2
+Die VM ist Pingbar
+
+>C:\Users\chris>ping 192.168.1.50</br></br>
+>Pinging 192.168.1.50 with 32 bytes of data:</br>
+>Reply from 192.168.1.50: bytes=32 time<1ms TTL=64</br>
+>Reply from 192.168.1.50: bytes=32 time<1ms TTL=64</br>
+>Reply from 192.168.1.50: bytes=32 time<1ms TTL=64</br>
+>Reply from 192.168.1.50: bytes=32 time<1ms TTL=64</br>
+
+## Testfall 3
+Die Webseite ist erreichbar</br>
+<img src="./doku/Test3.PNG" alt="Aufbau"><br></br>
+
+## Testfall 4
+Die Webseite wird beim richtigen Password aufgerufen:</br></br>
+<img src="./doku/Test4.PNG" alt="Aufbau"><br></br>
+
+## Testfall 5
+Preise und Name der Aktie werden wie gewünscht angepasst. </br></br>
+<img src="./doku/Test5.PNG" alt="Aufbau"><br></br>
+
+## Testfall 6 - Samba
+
+Es wird ein Password verlangt:
+
+>C:\Users\chris>net use z: \\192.168.1.50\sambashare</br>
+The password is invalid for \\192.168.1.50\sambashare.</br></br>
+Enter the user name for '192.168.1.50': vagrant</br>
+Enter the password for 192.168.1.50:</br>
+The command completed successfully.</br>
 
