@@ -12,8 +12,8 @@ config.vm.provision "file", source: "../website/unix/.htaccess_unix", destinatio
 config.vm.provision "file", source: "../website/unix/.htpasswd", destination: "/var/www/html/.htpasswd"
 config.vm.provision "file", source: "../website/css/style.css", destination: "/var/www/html/css/style.css"
 config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/www/html/pictures/background.jpg"
-config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/www/html/smb.conf"
-config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/www/html/pw.sh"
+#config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/www/html/smb.conf"
+#config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/www/html/pw.sh"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
   sudo apt-get -y upgrade
@@ -27,13 +27,13 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo python3.6 -m pip install yahoo_fin
   sudo mv /var/www/html/apache2.conf /etc/apache2/apache2.conf
   sudo service apache2 restart
-  sudo chmod 777 /etc/samba/pw.sh
-  sudo apt install -y samba  
-  sudo mv /var/www/html/smb.conf /etc/samba/smb.conf
-  sudo mv /var/www/html/pw.sh /etc/samba/pw.sh
-  sudo /etc/samba/pw.sh
-  sudo ufw allow samba
-  sudo service smbd restart
+  #sudo chmod 777 /etc/samba/pw.sh
+  #sudo apt install -y samba  
+  #sudo mv /var/www/html/smb.conf /etc/samba/smb.conf
+  #sudo mv /var/www/html/pw.sh /etc/samba/pw.sh
+  #sudo /etc/samba/pw.sh
+  #sudo ufw allow samba
+  #sudo service smbd restart
 SHELL
 end
 
