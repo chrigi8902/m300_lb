@@ -17,6 +17,8 @@
   - [Testfall 4](#testfall-4)
   - [Testfall 5](#testfall-5)
   - [Testfall 6 - Samba](#testfall-6---samba)
+  - [Testfall 7 - Samba](#testfall-7---samba)
+- [Quellen](#quellen)
 
 </br></br></br></br>
 # 1. Einleitung
@@ -208,3 +210,17 @@ Enter the user name for '192.168.1.50': vagrant</br>
 Enter the password for 192.168.1.50:</br>
 The command completed successfully.</br>
 
+## Testfall 7 - Samba
+
+Inhalt wird angezeigt:
+
+<img src="./doku/samba.PNG" alt="Aufbau"><br>
+</br></br></br>
+___
+# Quellen
+
+- [Samba](https://ubuntu.com/tutorials/install-and-configure-samba#1-overview)
+- [htaccess theorie](https://de.wikipedia.org/wiki/.htaccess)
+- [htpasswd](https://www.redim.de/blog/passwortschutz-mit-htaccess-einrichten)
+- [yahoo_fin](https://algotrading101.com/learn/yahoo-finance-api-guide/)
+- [python und php](http://www.terragon.de/kuenstliche-intelligenz/python-tutorials/python-in-php-ausfuehren/#:~:text=Schritt%201%3A%20PHP%20Datei%20erstellen&text=Dann%20wird%20das%20Python%20Skript,und%20Dateiname%20des%20Python%20Skriptes.)
