@@ -1,19 +1,19 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.network "public_network", bridge:"Realtek PCIe GbE Family Controller", ip: "192.168.1.50", guest:80, host:8080, auto_correct: true
-  config.vm.synced_folder ".", "/var/www/html"  
+  config.vm.synced_folder ".", "/var/tmp/vagrant"  
 config.vm.provider "virtualbox" do |vb|
   vb.memory = "8192" 
 end
-config.vm.provision "file", source: "../website/unix/index_unix.php", destination: "/var/www/html/index.php"
-config.vm.provision "file", source: "../website/unix/get_price_unix.py", destination: "/var/www/html/python/get_price.py"
-config.vm.provision "file", source: "../website/unix/apache2.conf", destination: "/var/www/html/apache2.conf"
-config.vm.provision "file", source: "../website/unix/.htaccess_unix", destination: "/var/www/html/.htaccess"
-config.vm.provision "file", source: "../website/unix/.htpasswd", destination: "/var/www/html/.htpasswd"
-config.vm.provision "file", source: "../website/css/style.css", destination: "/var/www/html/css/style.css"
-config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/www/html/pictures/background.jpg"
-config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/www/html/smb.conf"
-config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/www/html/pw.sh"
+config.vm.provision "file", source: "../website/unix/index_unix.php", destination: "/var/tmp/vagrant/html/index.php"
+config.vm.provision "file", source: "../website/unix/get_price_unix.py", destination: "/var/tmp/vagrant/html/python/get_price.py"
+config.vm.provision "file", source: "../website/unix/apache2.conf", destination: "/var/tmp/vagrant/html/apache2.conf"
+config.vm.provision "file", source: "../website/unix/.htaccess_unix", destination: "/var/tmp/vagrant/html/.htaccess"
+config.vm.provision "file", source: "../website/unix/.htpasswd", destination: "/var/tmp/vagrant/html/.htpasswd"
+config.vm.provision "file", source: "../website/css/style.css", destination: "/var/tmp/vagrant/html/css/style.css"
+config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/tmp/vagrant/html/pictures/background.jpg"
+config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/tmp/vagrant/samba/smb.conf"
+config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/tmp/vagrant/samba/pw.sh"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
   sudo apt-get -y upgrade
@@ -25,12 +25,22 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get -y install apache2
   sudo apt -y install apache2 php libapache2-mod-php
   sudo python3.6 -m pip install yahoo_fin
-  sudo mv /var/www/html/apache2.conf /etc/apache2/apache2.conf
+  # Dateien verschieben
+  sudo mv /var/tmp/vagrant/html/apache2.conf /etc/apache2/apache2.conf
+  sudo mv -v /var/tmp/vagrant/html/* /var/www/html
+  sudo mv /var/tmp/vagrant/html/.ht* /var/www/html/
+  sudo rm /var/www/html/index.html
+  sudo mkdir /var/www/html/python/tmp
+  sudo touch /var/www/html/python/tmp/price
+  sudo touch /var/www/html/python/tmp/stock
+  sudo chmod 777 /var/www/*
+  sudo chmod 777 /var/www/html/python/tmp/*
+  # Restart und Samba
   sudo service apache2 restart
   sudo chmod 777 /etc/samba/pw.sh
   sudo apt install -y samba  
-  sudo mv /var/www/html/smb.conf /etc/samba/smb.conf
-  sudo mv /var/www/html/pw.sh /etc/samba/pw.sh
+  sudo mv /var/tmp/vagrant/samba/smb.conf /etc/samba/smb.conf
+  sudo mv /var/tmp/vagrant/samba/pw.sh /etc/samba/pw.sh
   sudo /etc/samba/pw.sh
   sudo ufw allow samba
   sudo service smbd restart
