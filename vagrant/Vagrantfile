@@ -8,12 +8,12 @@ end
 config.vm.provision "file", source: "../website/unix/index_unix.php", destination: "/var/www/html/index.php"
 config.vm.provision "file", source: "../website/unix/get_price_unix.py", destination: "/var/www/html/python/get_price.py"
 config.vm.provision "file", source: "../website/unix/apache2.conf", destination: "/var/www/html/apache2.conf"
-config.vm.provision "file", source: "../website/unix/smb.conf", destination: "/var/www/html/smb.conf"
-config.vm.provision "file", source: "../website/unix/pw.sh", destination: "/var/www/html/pw.sh"
 config.vm.provision "file", source: "../website/unix/.htaccess_unix", destination: "/var/www/html/.htaccess"
 config.vm.provision "file", source: "../website/unix/.htpasswd", destination: "/var/www/html/.htpasswd"
 config.vm.provision "file", source: "../website/css/style.css", destination: "/var/www/html/css/style.css"
 config.vm.provision "file", source: "../website/pictures/background.jpg", destination: "/var/www/html/pictures/background.jpg"
+config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/www/html/smb.conf"
+config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/www/html/pw.sh"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
   sudo apt-get -y upgrade
