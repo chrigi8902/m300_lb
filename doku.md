@@ -9,6 +9,7 @@
 - [3. Sicherheit](#3-sicherheit)
   - [3.1 Funktionsweise von htaccess](#31-funktionsweise-von-htaccess)
   - [3.2 Aufbau von htaccess](#32-aufbau-von-htaccess)
+- [Zusätzlicher Dienst - Samba Share](#zusätzlicher-dienst---samba-share)
 
 </br></br></br></br>
 # 1. Einleitung
@@ -129,3 +130,32 @@ So sieht das htpasswd aus:
     m300:$apr1$2siq4wkt$25P6wMyMim6N08yLmmKqV0
 
 Ganz vorne zu erkennen ist der Username und im zweiten Teil ist das verschlüsselte Passwort, welches in diesem Fall ebenfalls m300 ist. 
+</br>
+</br>
+___
+# Zusätzlicher Dienst - Samba Share
+
+Als zusätzlichen Dienst habe ich eine Samba Freigabe erstellt, welche den gesamten /var/www/html Ordner freigibt. Installiert habe ich diesen Service, damit man jederzeit die Webseite anpassen kann, ohne sich auf die Maschine verbinden zu müssen. </br>
+Erstellt wird der Samba Share durch einen Konfigurationsbereich in der smb.conf Datei. 
+
+    [sambashare]
+    comment = Samba on Ubuntu
+    path = /var/www/html
+    read only = no
+    browsable = yes
+Um den User zu erstellen musste eine Bash Datei erstellt werden, da man dass Password leider nicht uninteraktiv festlegen konnte. 
+
+    #!/bin/bash
+    pass=root
+    if [ -z "$SUDO_USER" ]; then
+        echo "This script is only allowed to run from sudo";
+        exit -1;
+    fi
+    (echo "$pass"; echo "$pass") | smbpasswd -s -a vagrant
+
+Zwar könnte man die unterscheidung zwischen Sudo User und normalem user weglassen, persönlich finde ich dass allerdings eleganter. 
+
+Mit dem Share kann man neben der Webseite andere configurations Dateien mit Visual Studio Code anschauen um einen besseren überblick zu bekommen. Unter Windows muss man sich dort nur per erstellten User anmelden und kann die Dateien einsehen:
+
+<img src="./doku/samba.PNG" alt="Aufbau"><br>
+
