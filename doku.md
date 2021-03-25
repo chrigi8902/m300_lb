@@ -176,6 +176,17 @@ ___
 
 Für die Firewall habe ich nur die vier Regeln erlaubt, welche für Samba und fürs Apache benötigt werden, dies sieht etwa so aus:
 
+    Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    Samba                      ALLOW       Anywhere
+    Apache                     ALLOW       Anywhere
+    22                         ALLOW       Anywhere
+    Samba (v6)                 ALLOW       Anywhere (v6)
+    Apache (v6)                ALLOW       Anywhere (v6)
+    22 (v6)                    ALLOW       Anywhere (v6)
+
 </br>
 </br>
 
