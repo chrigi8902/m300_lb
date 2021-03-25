@@ -10,6 +10,7 @@
 - [4. Sicherheit](#4-sicherheit)
   - [4.1 Funktionsweise von htaccess](#41-funktionsweise-von-htaccess)
   - [4.2 Aufbau von htaccess](#42-aufbau-von-htaccess)
+  - [4.3 Firewall](#43-firewall)
 - [5. Testing](#5-testing)
   - [Testfall 1](#testfall-1)
   - [Testfall 2](#testfall-2)
@@ -168,6 +169,13 @@ So sieht das htpasswd aus:
     m300:$apr1$2siq4wkt$25P6wMyMim6N08yLmmKqV0
 
 Ganz vorne zu erkennen ist der Username und im zweiten Teil ist das verschlüsselte Passwort, welches in diesem Fall ebenfalls m300 ist. 
+</br>
+</br>
+___
+## 4.3 Firewall
+
+Für die Firewall habe ich nur die vier Regeln erlaubt, welche für Samba und fürs Apache benötigt werden, dies sieht etwa so aus:
+
 </br>
 </br>
 

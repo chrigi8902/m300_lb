@@ -15,16 +15,22 @@ config.vm.provision "file", source: "../website/pictures/background.jpg", destin
 config.vm.provision "file", source: "../samba/smb.conf", destination: "/var/tmp/vagrant/samba/smb.conf"
 config.vm.provision "file", source: "../samba/pw.sh", destination: "/var/tmp/vagrant/samba/pw.sh"
 config.vm.provision "shell", inline: <<-SHELL
+  #Updaten
   sudo apt-get update
   sudo apt-get -y upgrade
+
+  #python3.6 installieren
   sudo add-apt-repository ppa:deadsnakes/ppa  
   sudo apt-get update  
   sudo apt-get -y install python3.6
   wget https://bootstrap.pypa.io/get-pip.py
   sudo python3.6 get-pip.py
+  sudo python3.6 -m pip install yahoo_fin
+
+  #Apache2 und php installieren
   sudo apt-get -y install apache2
   sudo apt -y install apache2 php libapache2-mod-php
-  sudo python3.6 -m pip install yahoo_fin
+  
   # Dateien verschieben
   sudo mv /var/tmp/vagrant/html/apache2.conf /etc/apache2/apache2.conf
   sudo mv -v /var/tmp/vagrant/html/* /var/www/html
@@ -35,15 +41,22 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo touch /var/www/html/python/tmp/stock
   sudo chmod 777 /var/www/*
   sudo chmod 777 /var/www/html/python/tmp/*
-  # Restart und Samba
+
+  # Restart apache
   sudo service apache2 restart
+
+  #Samba installation
   sudo chmod 777 /etc/samba/pw.sh
   sudo apt install -y samba  
   sudo mv /var/tmp/vagrant/samba/smb.conf /etc/samba/smb.conf
   sudo mv /var/tmp/vagrant/samba/pw.sh /etc/samba/pw.sh
   sudo /etc/samba/pw.sh
-  sudo ufw allow samba
   sudo service smbd restart
+
+  #Firewall Regeln
+  echo "y" | sudo ufw enable
+  sudo ufw allow samba
+  sudo ufw allow apache
+  sudo ufw allow ssh
 SHELL
 end
-
