@@ -25,7 +25,8 @@
 # 1. Einleitung
 
 In der LB2 werden wir eine Webseite erstellen, welche anhand eines Aktien kürzels den Preis der aktie rausfinden kann.
-Ziel ist die Website selbst zu erstellen, Sie automatisch auf der Vagrant vm laufen zu lassen und die Seite Passwort zu schützen. 
+Ziel ist die Website selbst zu erstellen, Sie automatisch auf der Vagrant vm laufen zu lassen und die Seite Passwort zu schützen. </br>
+Verwenden werde ich neben PHP auch Python, was die Preise der Aktie für mich rausfindet. Die IP werde ich statisch setzen. 
 </br></br></br></br>
 
 # 2. Webseite
@@ -119,7 +120,7 @@ Die Python Datei sieht folgendermassen aus:
 ___
 # 3. Zusätzlicher Dienst - Samba Share
 
-Als zusätzlichen Dienst habe ich eine Samba Freigabe erstellt, welche den gesamten /var/www/html Ordner freigibt. Installiert habe ich diesen Service, damit man jederzeit die Webseite anpassen kann, ohne sich auf die Maschine verbinden zu müssen. </br>
+**Al**s zusätzlichen Dienst habe ich eine Samba Freigabe erstellt, welche den gesamten /var/www/html Ordner freigibt. Installiert habe ich diesen Service, damit man jederzeit die Webseite anpassen kann, ohne sich auf die Maschine verbinden zu müssen. </br>
 Erstellt wird der Samba Share durch einen Konfigurationsbereich in der smb.conf Datei. 
 
     [sambashare]
