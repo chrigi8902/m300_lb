@@ -2,7 +2,17 @@ version: '3'
 
 services:
   get-price:
-    build: ./Python
-    volumes:
-      - ./Share:/usr/src/app
+    build: ./p
     
+    ython
+    volumes:
+      - ./share/website/python:/usr/src/app
+  
+  website:
+    image: php:apache
+    volumes:
+      - ./share/website:/var/www/html
+    ports:
+      - 80:80
+    depends_on:
+      - get-price
