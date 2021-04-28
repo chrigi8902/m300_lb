@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import logging
@@ -17,17 +18,21 @@ class Event(LoggingEventHandler):
         if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp"):
                 stock_path = event.src_path
                 stock = stock_path.replace("./tmp/", "")
+
                 price = si.get_live_price(stock)
                 price_str = str(price)
+                print(stock_path)
+                try:
+                    os.remove(stock_path)
+                except:
+                    pass
 
-                print (price_str)
-                print (stock)
                 with open(file_price, 'w') as fileowrite:
                         fileowrite.write(price_str)
                 with open(file_stock, 'w') as fileowrite:
                         fileowrite.write(stock)
         else:
-                print("\\nothing")
+                pass
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
