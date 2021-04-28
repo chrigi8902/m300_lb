@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Password needed"
-AuthUserFile E:/Users/chris/schule/modul_300/m300_lb/website/.htpasswd
+AuthUserFile /var/www/html/.htpasswd
 Require valid-user
