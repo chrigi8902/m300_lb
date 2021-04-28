@@ -2,9 +2,7 @@ version: '3'
 
 services:
   get-price:
-    build: ./p
-    
-    ython
+    build: ./python
     volumes:
       - ./share/website/python:/usr/src/app
   
