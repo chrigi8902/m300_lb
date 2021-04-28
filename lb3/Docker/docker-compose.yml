@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  get-price:
+    build: ./Python
+    volumes:
+      - ./Share:/usr/src/app
+    
