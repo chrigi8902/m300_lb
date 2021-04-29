@@ -7,7 +7,7 @@ services:
       - ./share/website/python:/usr/src/app
   
   website:
-    image: php:apache
+    build: ./website
     volumes:
       - ./share/website:/var/www/html
     ports:
