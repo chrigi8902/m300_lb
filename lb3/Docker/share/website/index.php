@@ -19,7 +19,7 @@
   </h1>    
     <?php
     if (isset($_POST['stock']))
-    {
+    { 
       $valor = $_POST['stock'];
     }
     else{
@@ -29,7 +29,6 @@
       $myfile = fopen("./python/tmp/$valor", "w") or die("Unable to open file!");
       fclose($myfile);
       sleep(1);
-      $price = exec("python ./python/get_price.py $valor 2<&1");
       $valor_py = file_get_contents( "./python/tmp/stock.txt" );
       $price_py = file_get_contents( "./python/tmp/price.txt" );
     } else {

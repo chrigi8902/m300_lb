@@ -52,5 +52,6 @@ Vagrant.configure("2") do |config|
   sudo mv /var/tmp/vagrant/samba/pw.sh /etc/samba/pw.sh
   sudo /etc/samba/pw.sh
   sudo service smbd restart
+  cd docker && docker-compose up -d
   SHELL
 end
