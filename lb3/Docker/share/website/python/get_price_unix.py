@@ -16,7 +16,7 @@ class Event(LoggingEventHandler):
         stock_path = "Place Hold"
         
         #price_str = str(price)
-        if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp"):
+        if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp") and ("tmp" in event.src_path):
                 try:
                     stock_path = event.src_path
                     stock = stock_path.replace("./tmp/", "")
