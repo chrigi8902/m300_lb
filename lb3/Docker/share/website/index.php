@@ -18,14 +18,24 @@
     </form>
   </h1>    
     <?php
-    $valor = $_POST['stock'];
-
-    $myfile = fopen("./python/tmp/$valor", "w") or die("Unable to open file!");
-    fclose($myfile);
-    sleep(1);
-    $price = exec("python ./python/get_price.py $valor 2<&1");
-    $valor_py = file_get_contents( "./python/tmp/stock.txt" );
-    $price_py = file_get_contents( "./python/tmp/price.txt" );
+    if (isset($_POST['stock']))
+    {
+      $valor = $_POST['stock'];
+    }
+    else{
+      $valor = "Nothing";
+    }
+    if (preg_match("/[A-Z]/i",$valor)) {
+      $myfile = fopen("./python/tmp/$valor", "w") or die("Unable to open file!");
+      fclose($myfile);
+      sleep(1);
+      $price = exec("python ./python/get_price.py $valor 2<&1");
+      $valor_py = file_get_contents( "./python/tmp/stock.txt" );
+      $price_py = file_get_contents( "./python/tmp/price.txt" );
+    } else {
+      $valor_py = "Not Set";
+      $price_py = "Not Set";
+    }
     ?>
  
   <table>
