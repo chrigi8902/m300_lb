@@ -29,3 +29,6 @@ Anschliessend kann man das docker-compose starten
 
         docker-compose up -d
 
+## Wichtig
+
+Der Python Container muss Zugriff aufs Internet haben, da er von dort die Preis-Informationen bezieht.
