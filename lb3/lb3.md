@@ -40,7 +40,7 @@ ___
 
 Die Website soll eine PHP-Webseite sein, welche eine Python Datei zum Rausfinden von Aktien preisen benutzt. 
 
-Hier visualisiert:
+Hier visualisiert: </br>
 <img src="./doku/Aufbau.PNG" alt="Aufbau"><br>
 
 </br>
