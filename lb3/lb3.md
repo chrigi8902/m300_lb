@@ -38,7 +38,7 @@ ___
 
 </br>
 
-Die Website soll eine PHP-Webseite sein, welche eine Python Datei zum rausfinden von Aktien preisen benutzt. 
+Die Website soll eine PHP-Webseite sein, welche eine Python Datei zum Rausfinden von Aktien preisen benutzt. 
 
 Hier visualisiert:
 <img src="./doku/Aufbau.PNG" alt="Aufbau"><br>
@@ -77,10 +77,10 @@ Auf der Webseite haben wir ein kleines Fenster zum Eingeben des Valors erstellt 
     }
     ?>
 
-Hier mussten wir gleich mehrere Sachen abänder, weil sich der "Python Container" nicht über einen einfachen Befehl aufrufen lies. 
+Hier mussten wir gleich mehrere Sachen abänder, weil sich der "Python Container" nicht über einen einfachen Befehl aufrufen liess. 
 Um in durchgehend laufen zu lassen hat er also in einem Ordner nach änderungen gesucht.
 
-Mit unserer Webseite mussten wir so nur noch die richtigen Berrechtigungen haben um ein file im Share zu generieren und dieses anschliessend mit dem Namen der Aktie umbenennen. 
+Mit unserer Webseite mussten wir so nur noch die richtigen Berrechtigungen haben, um ein file im Share zu generieren und dieses anschliessend mit dem Namen der Aktie umbenennen. 
 
 </br>
 
@@ -95,11 +95,11 @@ ___
 
 </br>
 
-1) Nach dem input auf der Webseite erstellt die Webseite ein File mit dem Namen vom Input (z.B. TSLA)
+1) Nach dem input auf der Webseite erstellt die Webseite ein File mit dem Namen des Inputs (z.B. TSLA)
 2) Der Python Container, welcher durchgehend nach Änderungen auf dem Share sucht, merkt das und findet den Namen der Aktie durch den Filenamen raus. 
 3) Mit dem Namen versucht er mithilfe von yahoo_fin den Preis für diese Aktie rauszufinden.
 4) Falls dies geglückt ist und die Aktie existiert, schreibt er Preis und Namen seperat in zwei Files.
-5) Die Webseite zeigt die Inhalte der Files genau eine Sekunde nach dem erstellen vom File an.
+5) Die Webseite zeigt die Inhalte der Files genau eine Sekunde nach dem Erstellen vom File an.
 6) Das File wird vom Script gelöscht damit der Ordner nicht überfüllt wird. 
 
 
@@ -111,7 +111,7 @@ ___
 Um auf dem Share nach Änderungen zu schauen habe ich den Watchdog Observer benutzt, welches als Modul importiert werden kann und eine Art Beispiel auf der Webseite vorzufinden ist. </br>
 https://pypi.org/project/watchdog/ </br>
 
-Da dieser Script allerdings nur die Outputs mit einem Zeitformat ausgibt, habe ich ihn ein wenig umgeschrieben sodass er bei einer Änderung den Namen der Datei ausliesst und damit, wie in der LB2, weiter arbeitet. 
+Da dieses Script allerdings nur die Outputs mit einem Zeitformat ausgibt, habe ich ihn ein wenig , sodass er bei einer Änderung den Namen der Datei ausliesst und damit, wie in der LB2, weiter arbeitet. 
 
 class Event(LoggingEventHandler):
     def dispatch(self, event):
@@ -154,7 +154,7 @@ class Event(LoggingEventHandler):
         else:
                 pass
 
-Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auch habe ich Fallunterscheidungen eingebaut, damit es nicht zu Errors kommen kann und der Container am Laufen Bleibt. 
+Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auch habe ich Fallunterscheidungen eingebaut, damit es nicht zu Errors kommen kann und der Container am Laufen bleibt. 
 
 
 </br>
@@ -162,13 +162,13 @@ ___
 
 # 3. Docker
 
-Da ich mit dem Python Teil viel machen konnte, habe ich bei den Dockerfiles lediglich zwei Dockerfiles zum generieren von dem Python- und dem Website-Container gebraucht. Der wichtigste Teil war dabei, dass beide mit dem gleichen Share verbunden werden und die richtigen Berrechtigungen haben womit ich sehr stark zu kämpfen hatte. 
+Da ich mit dem Python Teil viel machen konnte, habe ich bei den Dockerfiles lediglich zwei Dockerfiles zum Generieren von dem Python- und dem Website-Container gebraucht. Der wichtigste Teil war dabei, dass beide mit dem gleichen Share verbunden werden und die richtigen Berrechtigungen haben, womit ich sehr stark zu kämpfen hatte. 
 
 Da ich die Permissions nicht mit den Dockerfiles setzen konnte, habe ich sie als Workaround direkt mit dem Python Script gesetzt. 
 
     os.system("chmod 777 -R ./*")
 
-So hat der Share ab einem bestimmten Punkt volle Berrechtigungen und kann somit das erstellen von Files erlauben. 
+So hat der Share ab einem bestimmten Punkt volle Berrechtigungen und kann somit das Erstellen von Files erlauben. 
 
 </br>
 ___
@@ -189,7 +189,7 @@ requirements.txt:
     watchdog==2.0.3
 
 Wenn man die nicht per Requirements file installiert, müsste man jeweils pip install 'name_vom_modul' eingeben was besonders bei grösseren Scripts sehr aufwendig werden kann. 
-Am Schluss vom Dockerfile wird dann noch mein Script ausgeführt welches den Container am Laufen lässt. 
+Am Schluss vom Dockerfile wird dann noch mein Script ausgeführt, welches den Container am Laufen lässt. 
 
 ### 3.1.2 Website
 
@@ -227,12 +227,12 @@ Die Schwierigkeiten lagen besonders im Sicherstellen, dass der Python Container 
 
 ## 4.1 Python Container
 
-Da mein alter Pythonscript jedesmal neu aufgerufen werden musste und somit der Container nach dem ersten mal nicht mehr am laufen währe, habe ich den Python Script komplett umschreiben müssen. Da mir die einfachste Variante die Container untereinander kommunizieren zu lassen ein Share zu sein schien, habe ich es auch dementsprechend umgesetzt. </br>
+Da mein alter Pythonscript jedesmal neu aufgerufen werden musste und somit der Container nach dem ersten Mal nicht mehr am laufen währe, habe ich den Python Script komplett umschreiben müssen. Da mir die einfachste Variante die Container untereinander kommunizieren zu lassen ein Share zu sein schien, habe ich es auch dementsprechend umgesetzt. </br>
 Auch stürtzte der Container immer ab, wenn man ihm falsch formatierte Aktien Namen gab. Mit sehr vielen Exceptions konnte ich dies dann ebenfalls lösen. 
 
 ## 4.2 Website Container
 
-Der Website container lief eigentlich von anfang an sehr gut, jedoch hatte die Webseite wie öffters erwähnt keine richtigen Permissions was mich Stunden zum Troubleshooten gekostet hat. leider habe ich in der Docker-Compose docku nicht gefunden, wie man einem Share "full" Permissions geben kann sodass ich dies über ein Workaround lösen musste. 
+Der Website container lief eigentlich von anfang an sehr gut, jedoch hatte die Webseite wie öffters erwähnt keine richtigen Permissions was mich Stunden zum Troubleshooten gekostet hat. leider habe ich in der Docker-Compose docku nicht gefunden, wie man einem Share "full" Permissions geben kann, sodass ich dies über ein Workaround lösen musste. 
 
 
 # Fazit
