@@ -160,7 +160,11 @@ Da dieses Script allerdings nur die Outputs mit einem Zeitformat ausgibt, habe i
             else:
                     pass
 
-Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auch habe ich Fallunterscheidungen eingebaut, damit es nicht zu Errors kommen kann und der Container am Laufen bleibt. 
+Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auch habe ich Fallunterscheidungen eingebaut, damit es nicht zu Errors kommen kann und der Container am Laufen bleibt. </br>
+In ungefähr wird der Pfad, solang dieser bestimmte Kriterien erfüllt so ausseinander genommen dass nur noch der Filename, welcher dem Aktiennamen entspricht, übrigbleibt. 
+Nachdem dieser name auch von Yahoo_fin gefunden wird, wird sowohl der name als auch der Preis in ein File geschrieben damit die Webseite dies Auslesen kann. </br></br>
+
+Falls die Aktie nicht existen sein sollte, bzw. ein falscher Name eingegeben wurde, wird in beide Files welche von der Webseite ausgelesen werden "Not Working" eingetippt. 
 
 
 </br>
