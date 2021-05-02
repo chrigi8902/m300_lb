@@ -113,46 +113,46 @@ https://pypi.org/project/watchdog/ </br>
 
 Da dieses Script allerdings nur die Outputs mit einem Zeitformat ausgibt, habe ich ihn ein wenig , sodass er bei einer Änderung den Namen der Datei ausliesst und damit, wie in der LB2, weiter arbeitet. 
 
-class Event(LoggingEventHandler):
-    def dispatch(self, event):
-        import sys
-        from yahoo_fin import stock_info as si
+    class Event(LoggingEventHandler):
+        def dispatch(self, event):
+            import sys
+            from yahoo_fin import stock_info as si
 
-        file_price = "/usr/src/app/tmp/price.txt"
-        file_stock = "/usr/src/app/tmp/stock.txt"
-        stock_path = "Place Hold"
-        
-        if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp") and ("tmp" in event.src_path):
-                try:
-                    stock_path = event.src_path
-                    stock = stock_path.replace("./tmp/", "")
-
-                    price = si.get_live_price(stock)
-                    price_str = str(price)
-                    print(stock_path)
+            file_price = "/usr/src/app/tmp/price.txt"
+            file_stock = "/usr/src/app/tmp/stock.txt"
+            stock_path = "Place Hold"
+            
+            if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp") and ("tmp" in event.src_path):
                     try:
-                        os.remove(stock_path)
-                    except:
-                        pass
+                        stock_path = event.src_path
+                        stock = stock_path.replace("./tmp/", "")
 
-                    with open(file_price, 'w') as fileowrite:
-                            fileowrite.write(price_str)
-                    with open(file_stock, 'w') as fileowrite:
-                            fileowrite.write(stock)
-                except:
-                    print("not working")
-                    price_str = "Not Found"
-                    stock = "Not Found"
-                    try:
-                        os.remove(stock_path)
+                        price = si.get_live_price(stock)
+                        price_str = str(price)
+                        print(stock_path)
+                        try:
+                            os.remove(stock_path)
+                        except:
+                            pass
+
+                        with open(file_price, 'w') as fileowrite:
+                                fileowrite.write(price_str)
+                        with open(file_stock, 'w') as fileowrite:
+                                fileowrite.write(stock)
                     except:
-                        pass
-                    with open(file_price, 'w') as fileowrite:
-                            fileowrite.write(price_str)
-                    with open(file_stock, 'w') as fileowrite:
-                            fileowrite.write(stock)
-        else:
-                pass
+                        print("not working")
+                        price_str = "Not Found"
+                        stock = "Not Found"
+                        try:
+                            os.remove(stock_path)
+                        except:
+                            pass
+                        with open(file_price, 'w') as fileowrite:
+                                fileowrite.write(price_str)
+                        with open(file_stock, 'w') as fileowrite:
+                                fileowrite.write(stock)
+            else:
+                    pass
 
 Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auch habe ich Fallunterscheidungen eingebaut, damit es nicht zu Errors kommen kann und der Container am Laufen bleibt. 
 
