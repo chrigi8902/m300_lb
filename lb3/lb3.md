@@ -18,6 +18,12 @@
   - [4.1 Python Container](#41-python-container)
   - [4.2 Website Container](#42-website-container)
 - [Fazit](#fazit)
+- [5. Testing](#5-testing)
+  - [Testfall 1](#testfall-1)
+  - [Testfall 2](#testfall-2)
+  - [Testfall 3](#testfall-3)
+  - [Testfall 4](#testfall-4)
+- [Quellen](#quellen)
 
 
 </br></br></br></br>
@@ -241,3 +247,34 @@ Schlussendlich bin ich zufrieden mit dem Projekt, auch wenn ich mehr Zeit in mei
 Auch wenn ich viel gebastelt habe und die Lösung, die Namen in Dateien zu schreiben nicht wirklich oft benutzt wird, scheint die Webseite gleich gut zu Laufen, als würde man wie in der LB2 alles mit der gleichen Maschine regeln. 
 
 
+</br>
+
+___
+# 5. Testing
+
+## Testfall 1
+Container werden mit docker-compose up gestartet </br></br>
+<img src="./doku/Test1.PNG" alt="Aufbau"><br></br>
+
+## Testfall 2
+Die Webseite hat die richtige IP und ist aufrufbar
+<img src="./doku/Test2.PNG" alt="Aufbau"><br></br>
+
+
+## Testfall 3
+Die Webseite wird beim richtigen Password aufgerufen:</br></br>
+<img src="./doku/Test3.PNG" alt="Aufbau"><br></br>
+
+## Testfall 4
+Preise und Name der Aktie werden wie gewünscht angepasst. </br></br>
+<img src="./doku/Test4.PNG" alt="Aufbau"><br></br>
+
+
+___
+# Quellen
+
+- [Watchdog](https://pypi.org/project/watchdog/)
+- [htaccess theorie](https://de.wikipedia.org/wiki/.htaccess)
+- [htpasswd](https://www.redim.de/blog/passwortschutz-mit-htaccess-einrichten)
+- [yahoo_fin](https://algotrading101.com/learn/yahoo-finance-api-guide/)
+- [file erstellen php](https://www.selfphp.de/praxisbuch/praxisbuchseite.php?site=218&group=38)
