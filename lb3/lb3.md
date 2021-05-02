@@ -15,6 +15,9 @@
     - [3.1.2 Website](#312-website)
   - [3.2 Docker-compose](#32-docker-compose)
 - [4. Schwierigkeiten](#4-schwierigkeiten)
+  - [4.1 Python Container](#41-python-container)
+  - [4.2 Website Container](#42-website-container)
+- [Fazit](#fazit)
 
 
 </br></br></br></br>
@@ -220,6 +223,21 @@ Das Dockercompose File setzt alles zusammen und erstellt die benötigten Shares.
 
 # 4. Schwierigkeiten
 
+Die Schwierigkeiten lagen besonders im Sicherstellen, dass der Python Container nicht abstürzt und dass der Webserver die richtigen Berrechtigungen hat. 
 
+## 4.1 Python Container
+
+Da mein alter Pythonscript jedesmal neu aufgerufen werden musste und somit der Container nach dem ersten mal nicht mehr am laufen währe, habe ich den Python Script komplett umschreiben müssen. Da mir die einfachste Variante die Container untereinander kommunizieren zu lassen ein Share zu sein schien, habe ich es auch dementsprechend umgesetzt. </br>
+Auch stürtzte der Container immer ab, wenn man ihm falsch formatierte Aktien Namen gab. Mit sehr vielen Exceptions konnte ich dies dann ebenfalls lösen. 
+
+## 4.2 Website Container
+
+Der Website container lief eigentlich von anfang an sehr gut, jedoch hatte die Webseite wie öffters erwähnt keine richtigen Permissions was mich Stunden zum Troubleshooten gekostet hat. leider habe ich in der Docker-Compose docku nicht gefunden, wie man einem Share "full" Permissions geben kann sodass ich dies über ein Workaround lösen musste. 
+
+
+# Fazit
+
+Schlussendlich bin ich zufrieden mit dem Projekt, auch wenn ich mehr Zeit in mein Pythonscript gesetzt habe als in die Dockerkonfiguration scheint das Produkt, wenn man es etwas aufbessert, sogar im Altag benutzbar zu sein. 
+Auch wenn ich viel gebastelt habe und die Lösung, die Namen in Dateien zu schreiben nicht wirklich oft benutzt wird, scheint die Webseite gleich gut zu Laufen, als würde man wie in der LB2 alles mit der gleichen Maschine regeln. 
 
 
