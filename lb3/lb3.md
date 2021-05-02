@@ -9,7 +9,12 @@
 - [3. Python Script](#3-python-script)
   - [2.1 Konzept](#21-konzept-1)
   - [2.2 Aufbau](#22-aufbau)
-  - [2.2 Aufbau](#22-aufbau-1)
+- [3. Docker](#3-docker)
+  - [3.1 Dockerfiles](#31-dockerfiles)
+    - [3.1.1 Python](#311-python)
+    - [3.1.2 Website](#312-website)
+  - [3.2 Docker-compose](#32-docker-compose)
+- [4. Schwierigkeiten](#4-schwierigkeiten)
 
 
 </br></br></br></br>
@@ -110,12 +115,10 @@ class Event(LoggingEventHandler):
         import sys
         from yahoo_fin import stock_info as si
 
-        #stock = str(sys.argv[1])
         file_price = "/usr/src/app/tmp/price.txt"
         file_stock = "/usr/src/app/tmp/stock.txt"
         stock_path = "Place Hold"
         
-        #price_str = str(price)
         if (event.src_path != "./tmp/price.txt") and (event.src_path != "./tmp/stock.txt") and (event.src_path != "./tmp") and ("tmp" in event.src_path):
                 try:
                     stock_path = event.src_path
@@ -154,4 +157,69 @@ Der "event.src_path" ist dabei der Pfad für die Datei, die angepasst wurde. Auc
 </br>
 ___
 
-## 2.2 Aufbau
+# 3. Docker
+
+Da ich mit dem Python Teil viel machen konnte, habe ich bei den Dockerfiles lediglich zwei Dockerfiles zum generieren von dem Python- und dem Website-Container gebraucht. Der wichtigste Teil war dabei, dass beide mit dem gleichen Share verbunden werden und die richtigen Berrechtigungen haben womit ich sehr stark zu kämpfen hatte. 
+
+Da ich die Permissions nicht mit den Dockerfiles setzen konnte, habe ich sie als Workaround direkt mit dem Python Script gesetzt. 
+
+    os.system("chmod 777 -R ./*")
+
+So hat der Share ab einem bestimmten Punkt volle Berrechtigungen und kann somit das erstellen von Files erlauben. 
+
+</br>
+___
+
+## 3.1 Dockerfiles
+
+### 3.1.1 Python
+
+    FROM python:3-onbuild
+    COPY . /usr/src/app
+    CMD [ "python", "get_price_unix.py" ]
+
+Beim Python Dockerfile war es wichtig, dasss die Requirements runtergeladen werden, welches ich mit der zweiten Zeile erledigen konnte. 
+
+requirements.txt:
+
+    yahoo_fin==0.8.8
+    watchdog==2.0.3
+
+Wenn man die nicht per Requirements file installiert, müsste man jeweils pip install 'name_vom_modul' eingeben was besonders bei grösseren Scripts sehr aufwendig werden kann. 
+Am Schluss vom Dockerfile wird dann noch mein Script ausgeführt welches den Container am Laufen lässt. 
+
+### 3.1.2 Website
+
+    FROM php:apache
+    ADD apache2.conf /etc/apache2/apache2.conf
+    EXPOSE 80
+
+Bei der Webseite musste ich lediglich die konfig rüber kopieren, welche die Authentification per Password ermöglicht.
+
+## 3.2 Docker-compose
+
+    version: '3'
+
+    services:
+      get-price:
+        build: ./python
+        volumes:
+          - ./share/website/python:/usr/src/app
+      
+      website:
+        build: ./website
+        volumes:
+          - ./share/website:/var/www/html
+        ports:
+          - 80:80
+        depends_on:
+          - get-price
+
+
+Das Dockercompose File setzt alles zusammen und erstellt die benötigten Shares. Wie oben bereits erwähnt werden die Berrechtigungen mit dem Python container gegeben da ich es anders nicht hinbekommen habe. 
+
+# 4. Schwierigkeiten
+
+
+
+
